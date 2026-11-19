@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_Arabic, Geist_Mono, Playfair_Display } from "next/font/google";
 import { headers } from "next/headers";
-import { getMessages, getLocale } from "next-intl/server";
+import { getMessages, getLocale, getTimeZone } from "next-intl/server";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -153,6 +153,7 @@ export default async function RootLayout({
   
   const locale = await getLocale();
   const messages = await getMessages();
+  const timeZone = await getTimeZone();
   const config = await getConfig();
   const isRtl = isRtlLocale(locale);
 
@@ -186,7 +187,7 @@ export default async function RootLayout({
         {process.env.GOOGLE_ANALYTICS_ID && (
           <Analytics gaId={process.env.GOOGLE_ANALYTICS_ID} />
         )}
-        <Providers locale={locale} messages={messages} theme={config.theme} branding={{ ...config.branding, useCloneBranding: config.homepage?.useCloneBranding }}>
+        <Providers locale={locale} messages={messages} timeZone={timeZone} theme={config.theme} branding={{ ...config.branding, useCloneBranding: config.homepage?.useCloneBranding }}>
           {isEmbedRoute || isKidsRoute ? (
             children
           ) : (
