@@ -30,6 +30,12 @@
 
 This guide explains how to deploy **prompts.chat** on your own private server for enhanced privacy and customization.
 
+For Vercel deployments, keep the **Next.js** framework preset. If the default
+Turbopack build hits the Hobby plan's function limit, try setting the project's
+Build Command to `npm run build -- --webpack`. Keep `outputFileTracingIncludes`
+in `next.config.ts` so the deployed server functions include the YAML prompt
+templates they read at runtime.
+
 ## Prerequisites
 
 - **Node.js** 24.x

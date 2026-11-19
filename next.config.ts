@@ -25,6 +25,13 @@ const nextConfig: NextConfig = {
   },
   // Enable standalone output for Docker
   output: "standalone",
+  // Prompts are read from disk through a dynamic path that tracing can miss.
+  outputFileTracingIncludes: {
+    "/*": ["./src/lib/ai/*.prompt.yml"],
+    "/api/prompt-builder/chat": [
+      "./src/app/api/prompt-builder/chat/prompt-builder-agent.prompt.yml",
+    ],
+  },
   // Experimental features
   experimental: {
     // Enable server actions
